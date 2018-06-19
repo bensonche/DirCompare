@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
+        <Label Content="Directory 1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="28" Width="69"/>
+        <TextBox x:Name="txtDir1" HorizontalAlignment="Left" Height="23" Margin="84,12,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnDir1" Content="..." HorizontalAlignment="Left" Margin="209,11,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="1.506,4.533" Click="btnDir1_Click" />
         
+        <Label Content="Directory 2" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Height="30" Width="69"/>
+        <TextBox x:Name="txtDir2" HorizontalAlignment="Left" Height="23" Margin="84,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnDir2" Content="..." HorizontalAlignment="Left" Margin="209,41,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="1.506,4.533" Click="btnDir2_Click"/>
+
     </Grid>
 </Window>

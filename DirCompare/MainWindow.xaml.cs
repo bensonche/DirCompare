@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace DirCompare
 {
@@ -23,6 +24,29 @@ namespace DirCompare
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnDir1_Click(object sender, RoutedEventArgs e)
+        {
+            DirectoryDialog(txtDir1);
+        }
+
+        private void btnDir2_Click(object sender, RoutedEventArgs e)
+        {
+            DirectoryDialog(txtDir2);
+        }
+
+        private void DirectoryDialog(System.Windows.Controls.TextBox textbox)
+        {
+            using (var dialog = new FolderBrowserDialog())
+            {
+                var result = dialog.ShowDialog();
+
+                if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.SelectedPath))
+                {
+                    textbox.Text = dialog.SelectedPath;
+                }
+            }
         }
     }
 }
