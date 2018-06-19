@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
+using System.IO;
 
 namespace DirCompare
 {
@@ -47,6 +48,58 @@ namespace DirCompare
                     textbox.Text = dialog.SelectedPath;
                 }
             }
+        }
+
+        private void btnCompare_Click(object sender, RoutedEventArgs e)
+        {
+            lblError.Text = "";
+
+            if (!ValidateInputs())
+                return;
+        }
+
+        private bool ValidateInputs()
+        {
+            bool hasError = false;
+            StringBuilder errorMsg = new StringBuilder();
+
+            if (string.IsNullOrWhiteSpace(txtDir1.Text))
+            {
+                errorMsg.AppendLine("Directory 1 is required");
+                hasError = true;
+            }
+            else if (!Directory.Exists(txtDir1.Text))
+            {
+                errorMsg.AppendLine("Directory 1 is invalid");
+                hasError = true;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtDir2.Text))
+            {
+                errorMsg.AppendLine("Directory 2 is required");
+                hasError = true;
+            }
+            else if (!Directory.Exists(txtDir2.Text))
+            {
+                errorMsg.AppendLine("Directory 2 is invalid");
+                hasError = true;
+            }
+
+            if (!hasError && txtDir1.Text == txtDir2.Text)
+            {
+                errorMsg.AppendLine("Cannot compare the same directories");
+                hasError = true;
+            }
+
+            if (hasError)
+                lblError.Text = errorMsg.ToString();
+
+            return hasError;
+        }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            txtDir1.Focus();
         }
     }
 }
