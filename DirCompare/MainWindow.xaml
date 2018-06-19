@@ -5,20 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DirCompare"
         mc:Ignorable="d"
+        MinWidth="525"
+        MinHeight="350"
         Title="MainWindow" Height="350" Width="525" Loaded="OnLoad">
     <Grid>
-        <Label Content="Directory 1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="28" Width="69"/>
-        <TextBox x:Name="txtDir1" HorizontalAlignment="Left" Height="23" Margin="84,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="1"/>
-        <Button x:Name="btnDir1" Content="..." HorizontalAlignment="Left" Margin="209,11,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="1.506,4.533" Click="btnDir1_Click" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <Label Content="Directory 2" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Height="30" Width="69"/>
-        <TextBox x:Name="txtDir2" HorizontalAlignment="Left" Height="23" Margin="84,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="2"/>
-        <Button x:Name="btnDir2" Content="..." HorizontalAlignment="Left" Margin="209,41,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="1.506,4.533" Click="btnDir2_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
 
-        <Button x:Name="btnCompare" Content="Compare" HorizontalAlignment="Left" Margin="446,12,0,0" VerticalAlignment="Top" Width="61" Height="51" Click="btnCompare_Click" IsDefault="True"/>
-        <TextBlock x:Name="lblError" Foreground="Red" HorizontalAlignment="Left" Margin="234,12,0,0" VerticalAlignment="Top" Height="51" Width="202" TextAlignment="Right" />
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <TextBox x:Name="txtResult" IsReadOnly="True" HorizontalAlignment="Left" Margin="10,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinHeight="242" Width="497" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <Label Content="Directory 1" Grid.Row="0" Grid.Column="0" Height="28" Width="69"/>
+            <TextBox x:Name="txtDir1" Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Stretch" TabIndex="1" Margin="5"/>
+            <Button x:Name="btnDir1" Grid.Row="0" Grid.Column="2" Content="..." Width="20" Height="20" Click="btnDir1_Click" />
 
+            <Label Content="Directory 2" Grid.Row="1" Grid.Column="0" Height="28" Width="69"/>
+            <TextBox x:Name="txtDir2" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Stretch" TabIndex="2" Margin="5"/>
+            <Button x:Name="btnDir2" Grid.Row="1" Grid.Column="2" Content="..." Width="20" Height="20" Click="btnDir2_Click" />
+        </Grid>
+
+        <TextBlock x:Name="lblError" Grid.Row="0" Grid.Column="1" Foreground="Red" VerticalAlignment="Stretch" TextAlignment="Right" Width="215" Margin="10" />
+        
+        <Button x:Name="btnCompare" Grid.Row="0" Grid.Column="2" Content="Compare" Width="61" Height="51" Click="btnCompare_Click" IsDefault="True" Margin="0,0,10,0"/>
+
+        <TextBox x:Name="txtResult" Grid.Row="1" Grid.Column="0" Margin="5" Grid.ColumnSpan="3" IsReadOnly="True" TextWrapping="Wrap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" />
     </Grid>
 </Window>
