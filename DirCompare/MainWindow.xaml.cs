@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.IO;
+using DirCompare.src;
 
 namespace DirCompare
 {
@@ -52,14 +53,34 @@ namespace DirCompare
 
         private void btnCompare_Click(object sender, RoutedEventArgs e)
         {
-            lblError.Text = "";
+            btnCompare.IsEnabled = false;
 
-            if (!ValidateInputs())
-                return;
+            try
+            {
+                if (ValidateInputs())
+                    return;
+
+                Compare();
+            }
+            finally
+            {
+                btnCompare.IsEnabled = true;
+            }
+        }
+
+        private void Compare()
+        {
+            txtResult.Text = "";
+
+            Comparator comparator = new Comparator(txtDir1.Text, txtDir2.Text);
+
+            txtResult.Text = comparator.Compare();
         }
 
         private bool ValidateInputs()
         {
+            lblError.Text = "";
+
             bool hasError = false;
             StringBuilder errorMsg = new StringBuilder();
 
