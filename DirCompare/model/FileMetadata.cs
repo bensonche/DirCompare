@@ -4,11 +4,22 @@ namespace DirCompare.model
 {
     public class FileMetadata
     {
+        public static bool checkDate;
+        public static bool checkContent;
+
         public string Name { get; set; }
+
+        private DateTime? _modifyDate;
         public DateTime? ModifyDate
         {
-            get { return null; }
-            set { }
+            get
+            {
+                return checkDate ? _modifyDate : null;
+            }
+            set
+            {
+                _modifyDate = value;
+            }
         }
         public long? Size { get; set; }
 

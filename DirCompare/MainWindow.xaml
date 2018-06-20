@@ -11,6 +11,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -45,6 +46,20 @@
         
         <Button x:Name="btnCompare" Grid.Row="0" Grid.Column="2" Content="Compare" Width="61" Height="51" Click="btnCompare_Click" IsDefault="True" Margin="0,0,10,0"/>
 
-        <TextBox x:Name="txtResult" Grid.Row="1" Grid.Column="0" Margin="5" Grid.ColumnSpan="3" IsReadOnly="True" TextWrapping="Wrap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type CheckBox}">
+                    <Setter Property="Margin" Value="10,0,0,0" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+            </StackPanel.Resources>
+
+            <Label Content="Compare using:" />
+            <CheckBox Content="Date" x:Name="cbxDate" IsChecked="True" />
+            <!--<CheckBox Content="Content" x:Name="cbxContent" IsChecked="False" />-->
+        </StackPanel>
+        
+        <TextBox x:Name="txtResult" Grid.Row="2" Grid.Column="0" Margin="5" Grid.ColumnSpan="3" IsReadOnly="True" TextWrapping="Wrap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+        
     </Grid>
 </Window>

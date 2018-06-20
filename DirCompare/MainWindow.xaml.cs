@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.IO;
 using DirCompare.src;
+using DirCompare.model;
 
 namespace DirCompare
 {
@@ -60,6 +61,7 @@ namespace DirCompare
                 if (ValidateInputs())
                     return;
 
+                FileMetadata.checkDate = cbxDate.IsChecked.HasValue ? false : cbxDate.IsChecked.Value;
                 Compare();
             }
             finally
