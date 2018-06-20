@@ -58,8 +58,29 @@
             <CheckBox Content="Date" x:Name="cbxDate" IsChecked="True" />
             <!--<CheckBox Content="Content" x:Name="cbxContent" IsChecked="False" />-->
         </StackPanel>
-        
-        <TextBox x:Name="txtResult" Grid.Row="2" Grid.Column="0" Margin="5" Grid.ColumnSpan="3" IsReadOnly="True" TextWrapping="Wrap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+
+        <TabControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="5">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="TextWrapping" Value="NoWrap" />
+                    <Setter Property="IsReadOnly" Value="True" />
+                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+                </Style>
+            </TabControl.Resources>
+
+            <TabItem Header="Summary">
+                <TextBox x:Name="txtResult" />
+            </TabItem>
+
+            <TabItem Header="Files Only in Dir 1">
+                <TextBox x:Name="txtResult1" />
+            </TabItem>
+
+            <TabItem Header="Files Only in Dir 2">
+                <TextBox x:Name="txtResult2" />
+            </TabItem>
+        </TabControl>
         
     </Grid>
 </Window>

@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Forms;
-using System.IO;
+﻿using DirCompare.model;
 using DirCompare.src;
-using DirCompare.model;
+using System.IO;
+using System.Text;
+using System.Windows;
+using System.Windows.Forms;
 
 namespace DirCompare
 {
@@ -72,11 +60,11 @@ namespace DirCompare
 
         private void Compare()
         {
-            txtResult.Text = "";
-
             Comparator comparator = new Comparator(txtDir1.Text, txtDir2.Text);
 
-            txtResult.Text = comparator.Compare();
+            txtResult.Text = comparator.Execute();
+            txtResult1.Text = comparator.result1;
+            txtResult2.Text = comparator.result2;
         }
 
         private bool ValidateInputs()
