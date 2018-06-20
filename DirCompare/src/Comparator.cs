@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using DirCompare.model;
 using System.Text;
 using System.Linq;
+using System.Security.Cryptography;
+using System;
 
 namespace DirCompare.src
 {
@@ -43,7 +45,7 @@ namespace DirCompare.src
 
             int count = 0;
 
-            foreach(var k in dict1.Keys.OrderBy(x=>x.Name))
+            foreach (var k in dict1.Keys.OrderBy(x => x.Name))
             {
                 if (dict2.ContainsKey(k))
                     continue;
@@ -75,7 +77,8 @@ namespace DirCompare.src
                 {
                     Name = f.Name,
                     ModifyDate = f.LastWriteTime,
-                    Size = f.Length
+                    Size = f.Length,
+                    MD5 = GetMD5(f)
                 };
 
                 if (!list.ContainsKey(fm))
@@ -88,12 +91,40 @@ namespace DirCompare.src
                     list[fm].Add(f.FullName);
             }
 
-            foreach(var d in dir.GetDirectories())
+            foreach (var d in dir.GetDirectories())
             {
                 GetDictionary(d, list);
             }
-            
+
             return list;
+        }
+
+        private string GetMD5(FileInfo f)
+        {
+            if (!FileMetadata.checkContent)
+                return null;
+
+            try
+            {
+                using (var md5Hash = MD5.Create())
+                using (var sw = new StreamReader(f.FullName))
+                {
+                    sw.ReadToEnd();
+                    byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(sw.ReadToEnd()));
+
+                    StringBuilder result = new StringBuilder();
+                    for (int i = 0; i < data.Length; i++)
+                    {
+                        result.Append(data[i].ToString("x2"));
+                    }
+
+                    return result.ToString();
+                }
+            }
+            catch(OutOfMemoryException)
+            {
+                return "";
+            }
         }
     }
 }

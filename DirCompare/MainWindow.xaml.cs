@@ -49,7 +49,8 @@ namespace DirCompare
                 if (ValidateInputs())
                     return;
 
-                FileMetadata.checkDate = cbxDate.IsChecked.HasValue ? false : cbxDate.IsChecked.Value;
+                FileMetadata.checkDate = cbxDate.IsChecked.HasValue ? cbxDate.IsChecked.Value : false;
+                FileMetadata.checkContent = cbxContent.IsChecked.HasValue ? cbxContent.IsChecked.Value : false;
                 Compare();
             }
             finally
