@@ -41,16 +41,27 @@ namespace DirCompare.src
         {
             StringBuilder result = new StringBuilder();
 
+            int count = 0;
+
             foreach(var k in dict1.Keys.OrderBy(x=>x.Name))
             {
                 if (dict2.ContainsKey(k))
                     continue;
 
+                count++;
+
                 result.AppendLine(k.Name);
                 dict1[k].OrderBy(x => x).ToList().ForEach(x => result.AppendFormat($"\t{x}\n"));
             }
 
-            return result.ToString();
+            StringBuilder finalResult = new StringBuilder();
+            finalResult.AppendLine($"{dict1.Keys.Count} files total in directory");
+            finalResult.AppendLine($"{count} unique files found");
+            finalResult.AppendLine();
+            finalResult.AppendLine(result.ToString());
+
+
+            return finalResult.ToString();
         }
 
         private Dictionary<FileMetadata, List<string>> GetDictionary(DirectoryInfo dir, Dictionary<FileMetadata, List<string>> list = null)
